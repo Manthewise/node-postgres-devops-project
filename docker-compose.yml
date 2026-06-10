@@ -1,0 +1,36 @@
+services:
+
+  app:
+    build: .
+    container_name: visitor-app
+
+    env_file:
+          - .env
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - db
+
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+
+    container_name: postgres-db
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: visitor_db
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+
+
