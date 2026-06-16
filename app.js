@@ -24,7 +24,7 @@ app.get("/", async (req, res) => {
 			            "SELECT COUNT(*) FROM visits"
 			          );
 
-		      res.send(`Total visitors: ${result.rows[0].count}`);
+		      res.send(`Total manthewise visitors: ${result.rows[0].count}`);
 		    } catch (err) {
 			        res.send(err.message);
 			      }
