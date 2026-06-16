@@ -16,18 +16,19 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          script:
+          script: |
             cd ~/node-postgres-devops-project
             
             # 1. Start the SSH agent and add your EC2's key so 'git pull' is authorized
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_ed25500  
+            eval $(ssh-agent -s)
+            ssh-add ~/.ssh/id_ed25500  
             
             # 2. Pull the changes down from GitHub
-          git pull origin main
+            git pull origin main
             
             # 3. Clear the previous snapshot and take a fresh one while starting up
-          docker-compose up -d --build
+            docker-compose up -d --build
             
             # 4. Clean up any leftover old snapshot fragments to save space
-          docker image prune -f
+            docker image prune -f
+ 
