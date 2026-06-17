@@ -30,6 +30,42 @@ app.get("/", async (req, res) => {
 			      }
 });
 
+app.get("/visits", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT COUNT(*) FROM visits"
+    );
+
+    res.status(200).json({
+      totalVisitors: Number(result.rows[0].count),
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+});
+
+
+app.get("/health", async (req, res) => {
+  try {
+    await pool.query("SELECT 1");
+
+    res.status(200).json({
+      status: "healthy",
+      database: "connected",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "unhealthy",
+      database: "disconnected",
+    });
+  }
+});
+
+
+
 app.listen(3000, () => {
 	  console.log("Server running on port 3000");
 });
