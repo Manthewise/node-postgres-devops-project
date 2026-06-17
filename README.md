@@ -6,7 +6,7 @@ A production-style multi-container application that tracks website visits using 
 
 ##  Live Demo
 
-https://your-subdomain.duckdns.org
+https://manthewisevisit.duckdns.org/
 
 ---
 
